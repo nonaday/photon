@@ -203,52 +203,16 @@
   class:compact={view == 'compact'}
   {style}
 >
-  {#if showCommunity && community}
-    <Popover>
-      {#snippet target(attachment)}
-        <button
-          {@attach attachment}
-          class={[
-            'row-span-2 shrink-0 mr-2 self-center group/btn',
-            'bg-slate-200 dark:bg-zinc-800 rounded-lg cursor-pointer',
-          ]}
-        >
-          {#if community.nsfw && settings.nsfwBlur}
-            <div
-              style="width: {view == 'compact' ? 24 : 32}; height: {view ==
-              'compact'
-                ? 24
-                : 32}"
-              class="bg-red-400 rounded-xl"
-            ></div>
-          {:else}
-            <Avatar
-              url={community?.icon}
-              width={view == 'compact' ? 24 : 32}
-              alt={community?.name}
-              circle={false}
-              class="group-hover/btn:scale-90 group-active/btn:scale-[.85] transition-transform"
-            />
-          {/if}
-        </button>
-      {/snippet}
-      {#snippet popover(open)}
-        {#if open && community && subscribed}
-          <Material
-            color="uniform"
-            rounding="2xl"
-            elevation="high"
-            class="max-w-2xl w-screen max-h-128 overflow-auto"
-            data-autoclose="false"
-          >
-            {#await import('../community/CommunityHeader.svelte') then { default: CommunityHeader }}
-              <CommunityHeader {community} {subscribed} />
-            {/await}
-          </Material>
-        {/if}
-      {/snippet}
-    </Popover>
-  {/if}
+  <Avatar
+    url={user?.avatar}
+    width={view == 'compact' ? 24 : 32}
+    alt={user?.name}
+    circle={true}
+    class={[
+      'row-span-2 shrink-0 mr-2 self-center group/btn',
+      'bg-slate-200 dark:bg-zinc-800 rounded-lg cursor-pointer',
+    ]}
+  />
   {#if showCommunity && community}
     <CommunityLink
       {community}
