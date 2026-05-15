@@ -862,6 +862,13 @@
             "voteRatioBar": {
                 "title": "Vote ratio bar",
                 "description": "When the controversiality of a post reaches greater than 15%, a bar will be displayed in the vote buttons to help visualize sentiment."
+            },
+            "postIcon": {
+                "title": "Post icon",
+                "description": "Choose what avatar to display next to each post.",
+                "poster": "Poster",
+                "community": "Community",
+                "combined": "Combined"
             }
         },
         "embeds": {

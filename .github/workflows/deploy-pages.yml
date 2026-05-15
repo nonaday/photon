@@ -39,6 +39,7 @@ jobs:
           PUBLIC_SHOW_INSTANCES_COMMUNITY: false
           PUBLIC_INSTANCE_URL: tranistan.com
           PUBLIC_VIEW: cozy
+          PUBLIC_POST_ICON: combined
 
       - name: Copy 404 fallback to index
         run: cp build/404.html build/index.html

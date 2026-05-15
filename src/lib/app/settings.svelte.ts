@@ -127,6 +127,10 @@ const settingsSchema = {
     noVirtualize: { default: false },
     reverseActions: { default: false, env: 'PUBLIC_REVERSE_ACTIONS' },
     titleOpensUrl: { default: false, env: 'PUBLIC_TITLE_OPENS_URL' },
+    postIcon: {
+      default: 'community' as 'community' | 'poster' | 'combined',
+      env: 'PUBLIC_POST_ICON',
+    },
   },
   filters: { default: [] as Filter[] },
   forms: {

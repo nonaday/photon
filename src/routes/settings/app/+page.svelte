@@ -308,6 +308,19 @@
     title={$t('settings.app.titleOpensUrl.title')}
     description={$t('settings.app.titleOpensUrl.description')}
   />
+  <Setting icon={Photo}>
+    {#snippet title()}
+      <span>{$t('settings.app.postIcon.title')}</span>
+    {/snippet}
+    {#snippet description()}
+      <span>{$t('settings.app.postIcon.description')}</span>
+    {/snippet}
+    <Select bind:value={settings.posts.postIcon}>
+      <Option value="community">{$t('settings.app.postIcon.community')}</Option>
+      <Option value="poster">{$t('settings.app.postIcon.poster')}</Option>
+      <Option value="combined">{$t('settings.app.postIcon.combined')}</Option>
+    </Select>
+  </Setting>
   <ToggleSetting
     icon={Tag}
     title={$t('settings.app.titleTags.title')}

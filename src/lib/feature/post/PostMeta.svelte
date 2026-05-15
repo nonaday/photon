@@ -4,9 +4,8 @@
   import { t } from '$lib/app/i18n'
   import Markdown from '$lib/app/markdown/Markdown.svelte'
   import { type View, settings } from '$lib/app/settings.svelte'
-  import Avatar from '$lib/ui/generic/Avatar.svelte'
   import { publishedToDate } from '$lib/ui/util/date'
-  import { Badge, Material, modal, Popover } from 'mono-svelte'
+  import { Badge, modal } from 'mono-svelte'
   import RelativeDate, {
     formatRelativeDate,
   } from 'mono-svelte/util/RelativeDate.svelte'
@@ -25,6 +24,7 @@
   } from 'svelte-hero-icons/dist'
   import { SvelteMap } from 'svelte/reactivity'
   import CommunityLink from '../community/CommunityLink.svelte'
+  import PostIcon from './PostIcon.svelte'
   import UserLink from '../user/UserLink.svelte'
 
   type BadgeType =
@@ -203,16 +203,7 @@
   class:compact={view == 'compact'}
   {style}
 >
-  <Avatar
-    url={user?.avatar}
-    width={view == 'compact' ? 24 : 32}
-    alt={user?.name}
-    circle={true}
-    class={[
-      'row-span-2 shrink-0 mr-2 self-center group/btn',
-      'bg-slate-200 dark:bg-zinc-800 rounded-lg cursor-pointer',
-    ]}
-  />
+  <PostIcon {community} {subscribed} {user} {view} />
   {#if showCommunity && community}
     <CommunityLink
       {community}
