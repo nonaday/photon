@@ -1,5 +1,6 @@
 <script lang="ts">
   import { browser } from '$app/environment'
+  import { goto } from '$app/navigation'
   import { page } from '$app/state'
   import { site } from '$lib/api/client.svelte'
   import { t } from '$lib/app/i18n'
@@ -7,14 +8,38 @@
   import Location from '$lib/feature/filter/Location.svelte'
   import Sort from '$lib/feature/filter/Sort.svelte'
   import ViewSelect from '$lib/feature/filter/ViewSelect.svelte'
+  import { feeds } from '$lib/feature/feeds/feed.svelte'
   import PostFeed from '$lib/feature/post/feed/PostFeed.svelte'
   import VirtualFeed from '$lib/feature/post/feed/VirtualFeed.svelte'
+  import PullToRefresh from '$lib/ui/generic/PullToRefresh.svelte'
   import Skeleton from '$lib/ui/generic/Skeleton.svelte'
   import { Header, Pageination } from '$lib/ui/layout'
   import { Button } from 'mono-svelte'
   import { ArrowRight, Icon } from 'svelte-hero-icons/dist'
 
   let { data = $bindable() } = $props()
+
+  async function refresh() {
+    // Clear the cached feed so the load function fetches fresh content.
+    feeds.get('/')?.refresh()
+    await goto(page.url, { invalidateAll: true })
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+
+  function handleKeydown(e: KeyboardEvent) {
+    // 'r' with no modifier keys, and only when focus is NOT inside a text field.
+    if (e.key !== 'r' || e.ctrlKey || e.metaKey || e.altKey) return
+    const el = document.activeElement
+    const inInput =
+      el instanceof HTMLInputElement ||
+      el instanceof HTMLTextAreaElement ||
+      el instanceof HTMLSelectElement ||
+      (el instanceof HTMLElement && el.isContentEditable)
+    if (!inInput) {
+      e.preventDefault()
+      refresh()
+    }
+  }
 
   $effect(() => {
     if (data.filters.value.sort)
@@ -29,6 +54,12 @@
       : PostFeed,
   )
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
+
+{#if browser}
+  <PullToRefresh onrefresh={refresh} />
+{/if}
 
 <svelte:head>
   <title>

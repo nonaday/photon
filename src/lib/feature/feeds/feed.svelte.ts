@@ -48,6 +48,12 @@ export class Feed<Params, Response> {
   update(value: Response) {
     this.#data = value
   }
+
+  /** Clear cached data so the next load() call fetches fresh content. */
+  refresh() {
+    this.#data = undefined
+    this.#lastParams = undefined
+  }
 }
 
 export interface FeedTypes {
