@@ -25,7 +25,7 @@
    */
   const visualPull = $derived(
     refreshing
-      ? threshold * 0.55       // anchor indicator while loading
+      ? threshold * 0.55 // anchor indicator while loading
       : Math.min(pullY, threshold * 1.5) * 0.5, // 2:1 ratio, capped
   )
 
