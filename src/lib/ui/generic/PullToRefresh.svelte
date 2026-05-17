@@ -48,6 +48,15 @@
       : 'transform 0.35s cubic-bezier(0.075, 0.82, 0.165, 1), opacity 0.35s ease',
   )
 
+  $effect(() => {
+    const html = document.documentElement
+    const prev = html.style.overscrollBehaviorY
+    html.style.overscrollBehaviorY = 'none'
+    return () => {
+      html.style.overscrollBehaviorY = prev
+    }
+  })
+
   function ontouchstart(e: TouchEvent) {
     if (refreshing || (scrollY.current ?? 0) > 2) return
     startY = e.touches[0].clientY

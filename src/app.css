@@ -83,11 +83,6 @@
   --font-sans: sans-serif;
 }
 
-html {
-  /* Let our custom pull-to-refresh handle downward overscroll instead of the browser. */
-  overscroll-behavior-y: none;
-}
-
 body {
   @apply bg-slate-50 text-slate-900 dark:bg-zinc-950 dark:text-zinc-100 accent-slate-950 dark:accent-zinc-50;
 }
